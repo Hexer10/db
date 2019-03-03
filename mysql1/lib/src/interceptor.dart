@@ -8,7 +8,7 @@ import 'package:conn_pool/conn_pool.dart';
 
 import 'manager.dart';
 
-class MySqlPool {
+class MySqlPool implements Interceptor<MySqlConnection>{
   /// The connection pool
   final Pool<MySqlConnection> pool;
 
@@ -40,7 +40,7 @@ class MySqlPool {
       : pool = SharedPool(manager);
 
   /// Injects a Postgres interceptor into current route context
-  Future<MySqlConnection> injectInterceptor(Context context) async {
+  Future<MySqlConnection> call(Context context) async {
     Connection<MySqlConnection> conn = await pool.get();
     context.addVariable(conn.connection);
     context.after.add((_) => conn.release());
