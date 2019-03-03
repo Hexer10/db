@@ -29,16 +29,16 @@ class MySqlManager extends ConnectionManager<MySqlConnection> {
 
   /// The timezone of this connection for date operations that don't specify a
   /// timezone.
-  final String timeZone;
 
-  MySqlManager(this.databaseName,
-      {this.host: 'localhost',
-      this.port: 3306,
-      this.username: 'postgres',
-      this.password,
-      this.useSsl: false,
-      this.timeout,
-      this.timeZone: "UTC"});
+  MySqlManager(
+    this.databaseName, {
+    this.host: 'localhost',
+    this.port: 3306,
+    this.username: 'postgres',
+    this.password,
+    this.useSsl: false,
+    this.timeout: const Duration(seconds: 30),
+  });
 
   @override
 
